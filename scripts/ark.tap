@@ -25,6 +25,8 @@
 # determine the action and the folder, $@ then contains only the files
 action=$1; shift;
 pwd=$1; shift;
+first_file="$1";
+first_file="$(basename "${first_file%.*}")";
 
 # check the action
 case $action in
@@ -33,7 +35,7 @@ create)
 	;;
 
 extract-here)
-	exec ark --batch --autosubfolder --destination "$pwd" "$@"
+	exec ark --batch --autosubfolder --destination "$pwd/$first_file/" "$@"
 	;;
 
 extract-to)
